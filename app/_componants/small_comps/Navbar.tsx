@@ -19,20 +19,22 @@ import Edit_profile from './Edit_profile'
 function Navbar(props:{ShowingLogo?:boolean}) {
 
   const [TO , setTO]:any = useState("")
+  const [userId,setId]:any = useState("")
   const [UserName, setUserName] = useState("");
 const [image, setImage] = useState("");
-  // useEffect(() => {
-  //   api.get(`/users/${localStorage.getItem("userId")}`, {
-  //     headers: {  "x-auth-header": To }
-  //   }).then((res) => {
-  //     setUserName(res.data.UserName);
-  //     setImage(res.data.image);
-  //   }).catch((e) => {
-  //     console.log("error => ", e);
-  //   })
+  useEffect(() => {
+    setId(localStorage.getItem("userId"))
+    setTO(window.localStorage.getItem("token"))
+    api.get(`/users/${userId}`, {
+      headers: {  "x-auth-header": TO }
+    }).then((res) => {
+      setUserName(res.data.UserName);
+      setImage(res.data.image);
+    }).catch((e) => {
+      console.log("error => ", e);
+    })
 
-  //   setTO(window.localStorage.getItem("token"))
-  // } , [])
+  } , [])
   
   return (
  <div className="parent flex justify-center px-15 max-md:px-6 py-7 bg-white">

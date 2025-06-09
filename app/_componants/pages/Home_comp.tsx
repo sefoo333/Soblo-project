@@ -130,7 +130,7 @@ function Home_comp() {
              <div className="follow mt-6">
               <h1 className='text-xl font-semibold'>Follow Me</h1>
                <div className="badges  flex gap-2 mt-2">
-                              <a href="https://github.com/sefoo333" target="_blank">
+                              <a aria-label={"github_follow"} href="https://github.com/sefoo333" target="_blank">
                                <Badge
                         variant="secondary"
                         className="bg-black text-sm text-white rounded-full dark:bg-black"
@@ -139,7 +139,7 @@ function Home_comp() {
                         Github
                       </Badge>
                         </a>
-                      <a href="https://www.linkedin.com/in/sefoo333/" target='_blank'>
+                      <a aria-label={"linkedin_follow"} href="https://www.linkedin.com/in/sefoo333/" target='_blank'>
                                <Badge
                         variant="secondary"
                         className="bg-blue-500 text-sm text-white rounded-full dark:bg-blue-600"
@@ -148,7 +148,7 @@ function Home_comp() {
                         LinkedIn
                       </Badge>
                        </a>
-                      <a href="https://www.youtube.com/@seif333" target="_blank" className='flex items-center gap-2'>
+                      <a aria-label={"youtube_follow"} href="https://www.youtube.com/@seif333" target="_blank" className='flex items-center gap-2'>
                                <Badge
                         variant="secondary"
                         className="bg-red-400 text-sm text-white rounded-full dark:bg-red-500"

@@ -41,7 +41,7 @@ const [image, setImage] = useState("");
    <div className="container justify-between  items-center flex ">
     <div className="flex items-center gap-9">
          
-  <Link href={"/"} aria-label={"logo page"] className='flex items-center gap-2'>
+  <Link href={"/"} aria-label={"logo page"} className='flex items-center gap-2'>
   <Image src={"/Soblo-Photoroom.png"} className={`${props.ShowingLogo ? "hidden" : ""}`} width={100} height={10} alt='logo page' />
   </Link>
   <Search_input />

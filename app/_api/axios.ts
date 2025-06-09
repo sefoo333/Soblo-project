@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001/api",
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "https://soblo-backend-production.up.railway.app/api",
   headers: {
     'Content-Type': 'application/json',
   },

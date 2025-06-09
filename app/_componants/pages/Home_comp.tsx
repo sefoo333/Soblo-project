@@ -99,7 +99,7 @@ function Home_comp() {
         <h1 className='text-xl font-semibold'>Trending News</h1>
         <div className="news flex flex-col gap-9 mt-7">
           <>
-          {data.sort((a:{view:number},b:{view:number}) => b.view - a.view).slice(0,3).map((e:post) => (
+          {data.reverse().sort((a:{view:number},b:{view:number}) => b.view - a.view).slice(0,3).map((e:post) => (
          <div className="new" key={e._id}>
             <Link href={`/${e._id}`}  >
               <div className="cube w-2 h-2 bg-red-500 mb-1"></div>

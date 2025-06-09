@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 import { toast, Toaster } from 'sonner'
 import { useRouter } from 'next/navigation'
 
-export const ShareContent = createContext({});
+export const ShareContent:any = createContext({});
 
 function page() {
 

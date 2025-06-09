@@ -3,7 +3,6 @@ import { Search } from 'lucide-react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
-import { Input } from "@/components/ui/input"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,18 +18,21 @@ import api from '@/app/_api/axios'
 import Edit_profile from './Edit_profile'
 function Navbar(props:{ShowingLogo?:boolean}) {
 
+  const [TO , setTO]:any = useState("")
   const [UserName, setUserName] = useState("");
 const [image, setImage] = useState("");
-  useEffect(() => {
-    api.get(`/users/${localStorage.getItem("userId")}`, {
-      headers: {  "x-auth-header": localStorage.getItem("token") }
-    }).then((res) => {
-      setUserName(res.data.UserName);
-      setImage(res.data.image);
-    }).catch((e) => {
-      console.log("error => ", e);
-    })
-  } , [])
+  // useEffect(() => {
+  //   api.get(`/users/${localStorage.getItem("userId")}`, {
+  //     headers: {  "x-auth-header": To }
+  //   }).then((res) => {
+  //     setUserName(res.data.UserName);
+  //     setImage(res.data.image);
+  //   }).catch((e) => {
+  //     console.log("error => ", e);
+  //   })
+
+  //   setTO(window.localStorage.getItem("token"))
+  // } , [])
   
   return (
  <div className="parent flex justify-center px-15 max-md:px-6 py-7 bg-white">
@@ -44,7 +46,7 @@ const [image, setImage] = useState("");
     </div>
     <div className="account">
    
-{window.localStorage.getItem("token") === null ? (<User_join />) : (
+{TO === null ? (<User_join />) : (
          <DropdownMenu>
   <DropdownMenuTrigger>        <Image src={image} width={40} height={40} className="img w-10 h-10 rounded-full bg-slate-100 " alt={''} /></DropdownMenuTrigger>
   <DropdownMenuContent>

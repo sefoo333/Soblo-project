@@ -12,13 +12,8 @@ async function page({params}:any) {
 
 
   
-     let data;
-     try {
-         data = await (await api.get(`/posts/${params.post_id}`)).data
-     } catch(error){
-        console.error("Error fetching post data:", error);
-        data = { PostName: "Post not found", content: "This post does not exist or has been deleted." };
-     }
+     
+     const data = await (await api.get(`/posts/${params.post_id}`)).data
     return (
  <>
  <Navbar />

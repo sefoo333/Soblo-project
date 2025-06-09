@@ -10,8 +10,8 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { toast, Toaster } from 'sonner'
 import { useRouter } from 'next/navigation'
+import { ShareContent } from './context'
 
-export const ShareContent =  createContext<any>(null);;
 
 function page() {
 

@@ -16,6 +16,7 @@ import Link from 'next/link'
 import Search_input from './Search_input'
 import api from '@/app/_api/axios'
 import Edit_profile from './Edit_profile'
+import { useRouter } from 'next/navigation'
 function Navbar(props:{ShowingLogo?:boolean}) {
 
   const [TO , setTO]:any = useState("")
@@ -23,7 +24,7 @@ function Navbar(props:{ShowingLogo?:boolean}) {
   const [UserName, setUserName] = useState("");
 const [image, setImage] = useState("");
 
-
+const router = useRouter();
 
   useEffect(() => {
    let id:any = localStorage.getItem("userId")
@@ -64,6 +65,7 @@ setTO(localStorage.getItem("token"))
            localStorage.removeItem("admin_sAs_admin");
                     localStorage.removeItem("token");
                     localStorage.removeItem("userId");
+           router.refresh();
                         }}>logout</DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>

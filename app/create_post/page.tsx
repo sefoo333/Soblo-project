@@ -3,7 +3,6 @@ import React, { createContext, useEffect, useState } from 'react'
 import Navbar from '../_componants/small_comps/Navbar'
 import { Eye, GitCommitVerticalIcon, Heart, MessageCircle, Share } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import Editor from '../_componants/small_comps/Editor'
 import api from '../_api/axios'
 import { post } from '../interfaces/user'
 import { Input } from '@/components/ui/input'
@@ -11,7 +10,11 @@ import { Button } from '@/components/ui/button'
 import { toast, Toaster } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { ShareContent } from './context'
+import dynamic from 'next/dynamic'
 
+const Editor = dynamic(() => import('../_componants/small_comps/Editor'), {
+  ssr: false,
+});
 
 function page() {
 
@@ -74,8 +77,8 @@ router.push(`/${res.data.id}`)
 
   return (
  <>
- <Toaster />
- <Navbar />
+ {/* <Toaster />
+ <Navbar /> */}
    <div className="parent w-full flex justify-center">
 <div className="container  w-[48rem] py-10">
     <div className="header my-4 mb-10">

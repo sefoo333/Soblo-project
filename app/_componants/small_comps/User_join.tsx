@@ -42,7 +42,7 @@ function User_join() {
 <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button className='rounded-full' variant="outline"><LogIn /></Button>
+          <Button className='rounded-full' variant="outline" aria-label={"Log in"}><LogIn /></Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>

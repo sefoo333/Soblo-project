@@ -41,8 +41,8 @@ const [image, setImage] = useState("");
    <div className="container justify-between  items-center flex ">
     <div className="flex items-center gap-9">
          
-  <Link href={"/"} className='flex items-center gap-2'>
-  <Image src={"/Soblo-Photoroom.png"} className={`${props.ShowingLogo ? "hidden" : ""}`} width={100} height={10} alt='' />
+  <Link href={"/"} aria-label={"logo page"] className='flex items-center gap-2'>
+  <Image src={"/Soblo-Photoroom.png"} className={`${props.ShowingLogo ? "hidden" : ""}`} width={100} height={10} alt='logo page' />
   </Link>
   <Search_input />
     </div>
@@ -50,7 +50,7 @@ const [image, setImage] = useState("");
    
 {TO === null ? (<User_join />) : (
          <DropdownMenu>
-  <DropdownMenuTrigger>        <Image src={image} width={40} height={40} className="img w-10 h-10 rounded-full bg-slate-100 " alt={''} /></DropdownMenuTrigger>
+  <DropdownMenuTrigger>        <Image src={image} width={40} height={40} className="img w-10 h-10 rounded-full bg-slate-100 " alt={'user_Navbar'} /></DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuLabel>Hello {UserName}</DropdownMenuLabel>
     <DropdownMenuSeparator />

@@ -97,7 +97,7 @@ function Post({data}:post | any) {
     <div className="image flex justify-center">
         {/* <div className="img w-full h-[400px] bg-slate-400 rounded-xl"></div> */}
         {data.Banner ? (
-            <Image src={data.Banner} alt="post image" width={1000} height={400} className='w-full h-[400px] rounded-xl object-cover' />
+            <Image src={data?.Banner ? data?.Banner : "/"} alt="post image" width={1000} height={400} className='w-full h-[400px] rounded-xl object-cover' />
         ) : null }
     </div>
     <div className="text py-10">
@@ -152,7 +152,7 @@ function Post({data}:post | any) {
          <div key={a} className="comment py-5 border-b border-b-[#dddcdc]">
             <div className="flex justify-between">
                  <div className="account flex gap-2 items-center pb-4">
-            <Image src={e?.PhotoUrl} className="img w-10 h-10 rounded-full bg-slate-300" width={40} height={40} alt='' />
+            <Image src={e.PhotoUrl !== "" ? e?.PhotoUrl : "/"} className="img w-10 h-10 rounded-full bg-slate-300" width={40} height={40} alt='' />
             <div className="text">
                 <h1 className='text-md mb-[-5px]'>{e.commentName}</h1>
                 <span className='text-[13px] text-gray-600'>{e.commentDate.slice(0,10).split("-").join("/")}</span>

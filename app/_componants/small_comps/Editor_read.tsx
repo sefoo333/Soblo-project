@@ -24,9 +24,6 @@ function Editor_read({data , readOnly = false}:any) {
         data:data ? data : {},
         autofocus: true,
         readOnly,
-        onReady: () => {
-          console.log('Editor.js is ready to use!');
-        },
       });
     }
 

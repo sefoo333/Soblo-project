@@ -12,7 +12,11 @@ import { useRouter } from 'next/navigation';
 
 function layout({children}:any) {
 
-  const getAdmin = localStorage.getItem("admin_sAs_admin");
+  const [getAdmin,setTo]:any = useState("")
+  useEffect(() => {
+    setTo(localStorage.getItem("admin_sAs_admin"))
+  },[])        
+  
   const routes = useRouter();
 
   const Auth  =  (e:React.FormEvent | any) => {

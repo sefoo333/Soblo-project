@@ -5,7 +5,6 @@ import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import { createReactEditorJS } from 'react-editor-js';
 import EditorJS from '@editorjs/editorjs';
-import { ShareContent } from '@/app/create_post/page';
 import Image from '@editorjs/image'
 
 

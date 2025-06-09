@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.api_soblo,
+  baseURL: process.env.NEXT_PUBLIC_SOBLO_API,
   headers: {
     'Content-Type': 'application/json',
   },

@@ -65,9 +65,6 @@ function Editor({onSave}:any) {
           }
         },
         autofocus: true,
-        onReady: () => {
-          console.log('Editor.js is ready to use!');
-        },
         onChange: async () => {
             const outputData = await editorRef.current.save();
     console.log(outputData)

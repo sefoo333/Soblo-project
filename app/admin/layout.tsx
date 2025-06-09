@@ -1,7 +1,7 @@
 "use client"
 
 import { SidebarProvider } from '@/components/ui/sidebar'
-import React, { useEffect } from 'react'
+import React, { useEffect , useState } from 'react'
 import { Sidebaer } from '../_componants/small_comps/Sidebar'
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';

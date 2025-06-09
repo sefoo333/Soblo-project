@@ -11,6 +11,7 @@ import { toast, Toaster } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { ShareContent } from './context'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 
 const Editor = dynamic(() => import('../_componants/small_comps/Editor'), {
   ssr: false,
@@ -117,7 +118,7 @@ router.push(`/${res.data.id}`)
                   CreatePost();
         }
       }}>Post</Button>
-      <Button variant={"destructive"}>Cancel</Button>
+      <Button variant={"destructive"}><Link href={"/"}>Cancel</Link></Button>
     </div>
    
 

@@ -183,7 +183,7 @@ const [data,setData] = useState([]);
                  {data.map((e:users) => (
                    <div id={e._id} className="student flex justify-between  py-5 items-center border-b border-b-[#ccc]">
                  <div className="so flex gap-4">
-              <Image src={e.image ? e.image : "https://res.cloudinary.com/dj2rasyos/image/upload/v1749388441/g0uckfqkiwuupbrjcdni.jpg"} width={300} height={150} alt='' className="img rounded-full w-10 h-10 max-md:w-full object-cover bg-slate-300 " />
+              <Image src={e.image} width={300} height={150} alt='' className="img rounded-full w-10 h-10 max-md:w-full object-cover bg-slate-300 " />
                   <div className="text">
                     <h1 className='font-semibold text-md'>{e.UserName} {e.isAdmin ? "- Admin" : ""}</h1>
                     <h1 className='text-sm'>{e.email}</h1>
@@ -221,7 +221,7 @@ RemoveAdmin(e._id)
                  {serchData.map((e:users) => (
                    <div id={e._id} className="student flex justify-between  py-5 items-center border-b border-b-[#ccc]">
                  <div className="so flex gap-4">
-              <Image src={"https://res.cloudinary.com/dj2rasyos/image/upload/v1749388441/g0uckfqkiwuupbrjcdni.jpg"} width={300} height={150} alt='' className="img rounded-full w-10 h-10 max-md:w-full object-cover bg-slate-300" />
+              <Image src={e.image} width={300} height={150} alt='' className="img rounded-full w-10 h-10 max-md:w-full object-cover bg-slate-300" />
                   <div className="text">
                     <h1 className='font-semibold text-md'>{e.UserName} {e.isAdmin ? "- Admin" : ""}</h1>
                     <h1 className='text-sm'>{e.email}</h1>

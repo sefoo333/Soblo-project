@@ -93,7 +93,7 @@ console.log(res)
             <div className="grid gap-4">
             <div className="grid gap-3">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" defaultValue="" />
+              <Input type={"email"} id="email" name="email" defaultValue="" />
             </div>
            {switcher ? (
              <div className="grid gap-3">

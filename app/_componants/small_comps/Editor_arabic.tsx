@@ -12,7 +12,7 @@ import { ShareContent } from '@/app/create_post/context';
 
 
 
-function Editor({arabic , setlanguage}:any) {
+function Editor_arabic({arabic , setlanguage}:any) {
   const [share , setShare , datalang,setDataLang]:any = useContext(ShareContent);
 
   const editorRef = useRef<EditorJS | null | any>(null);
@@ -71,11 +71,8 @@ function Editor({arabic , setlanguage}:any) {
         onChange: async () => {
             const outputData = await editorRef.current.save();
     console.log(outputData)
-    if(datalang){
        setDataLang(outputData);
-    }else {
-       setShare(outputData);
-    } // Pass data to parent or send directly here
+    // Pass data to parent or send directly here
         }
       });
     }
@@ -102,4 +99,4 @@ function Editor({arabic , setlanguage}:any) {
   )
 }
 
-export default Editor
+export default Editor_arabic

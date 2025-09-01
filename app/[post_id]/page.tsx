@@ -5,16 +5,13 @@ import { Badge } from '@/components/ui/badge'
 import api from '../_api/axios'
 import { post } from '../interfaces/user'
 import Editor from '../_componants/small_comps/Editor'
-import Editor_read from '../_componants/small_comps/Editor_read'
 import Post from './_comps/Post'
 
 async function page({params}:any) {
 
+     const data = await (await api.get(`/posts/${params.post_id}`)).data
 
-  
-     
-     const data = await (await api.get(`/posts/${params.post_id}`)).data || []
-    return (
+     return (
  <>
  <Navbar />
   <Post data={data} />

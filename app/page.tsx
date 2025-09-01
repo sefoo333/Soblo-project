@@ -2,7 +2,7 @@
 import Navbar from "./_componants/small_comps/Navbar"
 import Home_comp from "./_componants/pages/Home_comp";
 
- export default function Home() {
+ export default async function Home() {
 
   return (
    <>

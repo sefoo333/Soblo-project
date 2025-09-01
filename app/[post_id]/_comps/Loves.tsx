@@ -29,13 +29,16 @@ function Loves({data , id}: {data:any , id:string}) {
     const [show, setShow] = useState(false)
     const routes = useRouter()
     
+    const [image,setImage] = useState('')
+    const [name,setName] = useState('')
+
       useEffect(() => {
             const Mydata = data.find((e:any) => e.id === localStorage.getItem("userId"));
             if (Mydata) {
                 setLove(true)
             }
         },[])
-    
+  
 
   return (
 

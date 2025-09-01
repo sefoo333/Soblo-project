@@ -42,7 +42,7 @@ function User_join() {
 <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button className='rounded-full' variant="outline" aria-label={"Log in"}><LogIn /></Button>
+          <Button className='rounded-full' variant="outline"><LogIn /></Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -93,7 +93,7 @@ console.log(res)
             <div className="grid gap-4">
             <div className="grid gap-3">
               <Label htmlFor="email">Email</Label>
-              <Input type={"email"} id="email" name="email" defaultValue="" />
+              <Input id="email" name="email" defaultValue="" />
             </div>
            {switcher ? (
              <div className="grid gap-3">

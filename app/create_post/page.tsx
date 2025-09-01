@@ -11,16 +11,21 @@ import { toast, Toaster } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { ShareContent } from './context'
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
+import Editor_arabic from '../_componants/small_comps/Editor_arabic'
 
 const Editor = dynamic(() => import('../_componants/small_comps/Editor'), {
   ssr: false,
 });
 
 function page() {
-
+  
   const router = useRouter()
   
+  const [switcher , setSwitch] = useState(false)
+  const [datalang , setDataLang] = useState("")
+  const [arabicTitle,setArabic] = useState("")
   const [imageUrl, setImageUrl] = useState("/");
   const [content,setContent]:any = useState({});
   const [Title,setTitle] = useState("seff");
@@ -32,6 +37,11 @@ function page() {
       content:content,
       tags:tags.split("-"),
       Date:new Date().toLocaleDateString(),
+      language:switcher,
+      languageData:{
+        title:arabicTitle,
+        body:datalang
+      }
     } , {
       headers:{
         "x-auth-header":localStorage.getItem("token")
@@ -46,11 +56,11 @@ router.push(`/${res.data.id}`)
   }
 
 
-  useEffect(() => {
-    if (localStorage.getItem("admin_sAs_admin") === null) {
-      router.push("/")
-    }
-  } , [])
+  // useEffect(() => {
+  //   if (localStorage.getItem("admin_sAs_admin") === null) {
+  //     router.push("/")
+  //   }
+  // } , [])
 
 
     
@@ -75,16 +85,24 @@ router.push(`/${res.data.id}`)
        
       }
 
-
   return (
  <>
  {/* <Toaster />
  <Navbar /> */}
    <div className="parent w-full flex justify-center">
 <div className="container  w-[48rem] py-10">
+ <div className="flex items-center space-x-2">
+      <Switch onClick={() => setSwitch((e) => !e)} id="airplane-mode" />
+      <Label htmlFor="airplane-mode">Open Translate</Label>
+    </div>
     <div className="header my-4 mb-10">
 
 <Input type='text' onChange={(e) => setTitle(e.target.value)} defaultValue={"Write Here"} className='text-6xl font-bold' />        
+
+{switcher && <div className="switcher">
+        <h1 className='font-semibold mt-5'>Arabic</h1>
+  <Input type='text' onChange={(e) => setArabic(e.target.value)} defaultValue={"اكتب هنا"} className='text-6xl font-bold' />        
+</div>}
     </div>
     <div className="image relative flex justify-center">
 {
@@ -97,8 +115,14 @@ router.push(`/${res.data.id}`)
 { imageUrl === "/" ? <span className='absolute font-semibold  text-5xl top-1/2 left-1/2 translate-[-50%]'>Banner</span> : null}
     </div>
     <div className="text py-10">
-      <ShareContent.Provider value={[content,setContent]}>
-      <Editor />
+      <ShareContent.Provider value={[content,setContent , datalang ,setDataLang]}>
+        <h1 className='font-semibold'>English</h1>
+      <Editor  />
+      {switcher && 
+      <div className="arabic mt-5">
+        <h1 className='font-semibold'>Arabic</h1>
+        <Editor_arabic />
+      </div>}
       </ShareContent.Provider>
 
     </div>
@@ -118,7 +142,7 @@ router.push(`/${res.data.id}`)
                   CreatePost();
         }
       }}>Post</Button>
-      <Button variant={"destructive"}><Link href={"/"}>Cancel</Link></Button>
+      <Button variant={"destructive"}>Cancel</Button>
     </div>
    
 

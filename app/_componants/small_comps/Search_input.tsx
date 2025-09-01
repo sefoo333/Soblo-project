@@ -22,9 +22,9 @@ api.get("/posts").then((res) => {
         }
       });
       
-      const getTags = res.data.map((e:any) => e.tags.map((tag:string) => tag.toLowerCase()));
+      const getTags = res.data.map((e:any) => e.tags.map((tag:string) => tag.toLowerCase().trim()));
         const filteredTitles = getTitles.filter((e:{title:string}) => e.title.includes(searchValue.toLowerCase()));
-        const filteredTags = getTags.flat().filter((tag:string) => tag.includes(searchValue.toLowerCase()));
+        const filteredTags = getTags.flat().filter((tag:string) => tag.trim().includes(searchValue.toLowerCase().trim()));
 
         setTitles(filteredTitles)
         setTags(filteredTags)

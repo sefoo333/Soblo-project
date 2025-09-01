@@ -43,7 +43,10 @@ function Home_comp() {
         }
     ]
 
-        
+const [to,setTo]:any = useState("")
+useEffect(() => {
+  setTo(localStorage.getItem("token"))
+},[])        
 
 
 
@@ -51,14 +54,18 @@ function Home_comp() {
     <>
             <Toaster />
   <div className="window flex gap-9">
+    {/* <h1 className='font-bold text-4xl'>Courses</h1>
+    <div className="courses mt-10 grid gap-7 w-full grid-cols-3">
+        <Course_card />
+        <Course_card />
+        <Course_card />
+    </div> */}
     <div className="posts basis-[70%] max-md:basis-full flex flex-col gap-7">
       
 
-
-{/* posts */}
         {data.map((e:post) => (
           <Link href={`/${e._id}`} key={e._id} onClick={() => {
-            api.put("/posts/updateViews",{view:e.view+1 , id:e._id} , {headers:{"x-auth-header":localStorage.getItem("token")}}).then((e) => console.log("success")).catch((err) => console.log("ee",err))
+            api.put("/posts/updateViews",{view:e.view+1 , id:e._id} , {headers:{"x-auth-header":to}}).then((e) => console.log("success")).catch((err) => console.log("ee",err))
           }}>
              <div id={e._id} className="post flex justify-between bg-white border border-[#e2dfdf] p-5 rounded-md max-xl:flex-col  max-xl:gap-5">
           <div className="text">
@@ -90,13 +97,12 @@ function Home_comp() {
           </Link>
         ))}
 
-{/* sidebar */}
     </div>
     <div className="sidebar basis-[30%] sticky bg-white p-10 rounded-md border border-[#e2dfdf] max-md:hidden">
         <h1 className='text-xl font-semibold'>Trending News</h1>
         <div className="news flex flex-col gap-9 mt-7">
           <>
-          {data.reverse().sort((a:{view:number},b:{view:number}) => b.view - a.view).slice(0,3).map((e:post) => (
+          {data.sort((a:{view:number},b:{view:number}) => b.view - a.view).slice(0,3).map((e:post) => (
          <div className="new" key={e._id}>
             <Link href={`/${e._id}`}  >
               <div className="cube w-2 h-2 bg-red-500 mb-1"></div>
@@ -127,7 +133,7 @@ function Home_comp() {
              <div className="follow mt-6">
               <h1 className='text-xl font-semibold'>Follow Me</h1>
                <div className="badges  flex gap-2 mt-2">
-                              <a aria-label={"github_follow"} href="https://github.com/sefoo333" target="_blank">
+                              <a href="https://github.com/sefoo333" target="_blank">
                                <Badge
                         variant="secondary"
                         className="bg-black text-sm text-white rounded-full dark:bg-black"
@@ -136,7 +142,7 @@ function Home_comp() {
                         Github
                       </Badge>
                         </a>
-                      <a aria-label={"linkedin_follow"} href="https://www.linkedin.com/in/sefoo333/" target='_blank'>
+                      <a href="https://www.linkedin.com/in/sefoo333/" target='_blank'>
                                <Badge
                         variant="secondary"
                         className="bg-blue-500 text-sm text-white rounded-full dark:bg-blue-600"
@@ -145,7 +151,7 @@ function Home_comp() {
                         LinkedIn
                       </Badge>
                        </a>
-                      <a aria-label={"youtube_follow"} href="https://www.youtube.com/@seif333" target="_blank" className='flex items-center gap-2'>
+                      <a href="https://www.youtube.com/@seif333" target="_blank" className='flex items-center gap-2'>
                                <Badge
                         variant="secondary"
                         className="bg-red-400 text-sm text-white rounded-full dark:bg-red-500"

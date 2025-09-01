@@ -58,11 +58,11 @@ router.push(`/${res.data.id}`)
   }
 
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("admin_sAs_admin") === null) {
-  //     router.push("/")
-  //   }
-  // } , [])
+  useEffect(() => {
+    if (localStorage.getItem("admin_sAs_admin") === null) {
+      router.push("/")
+    }
+  } , [])
 
 
     

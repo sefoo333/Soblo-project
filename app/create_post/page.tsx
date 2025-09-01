@@ -13,9 +13,11 @@ import { ShareContent } from './context'
 import dynamic from 'next/dynamic'
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
-import Editor_arabic from '../_componants/small_comps/Editor_arabic'
 
 const Editor = dynamic(() => import('../_componants/small_comps/Editor'), {
+  ssr: false,
+});
+const Editor_arabic  = dynamic(() => import('../_componants/small_comps/Editor_arabic'), {
   ssr: false,
 });
 

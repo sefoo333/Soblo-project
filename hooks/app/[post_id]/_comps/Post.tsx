@@ -1,9 +1,9 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { Ellipsis, Eye, GitCommitVerticalIcon, Heart, MessageCircle, Share } from 'lucide-react'
+import { Ellipsis, Eye, GitCommitVerticalIcon, Heart, Languages, MessageCircle, Share } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import api from '../../_api/axios'
-import Editor_read from '../../_componants/small_comps/Editor_read'
+import  {Editor_read, Editor_read2 } from '../../_componants/small_comps/Editor_read'
 import { ShareButton } from './Share'
 import { comment, post } from '@/app/interfaces/user'
 import { Input } from '@/components/ui/input'
@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import {io} from 'socket.io-client';
 import { toast, Toaster } from 'sonner'
 import Image from 'next/image'
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,15 +22,28 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useRouter } from 'next/navigation'
 import Loves from './Loves'
+import TranslateButton from './TranslateButton'
+import { Tajawal } from 'next/font/google'
+import Link from 'next/link'
+const geistMono = Tajawal({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  weight:["200","300" ,"400","500","700" ,"800" ,"900"]
+});
 // const socket = io(`http://localhost:3001/api/posts/updatelikes`);
 function Post({data}:post | any) {
     const [love,setLove] = useState(false)
     const [loves,setloves] = useState(0)
     const [content,setContent] = useState("")
-const [getData,setGetData] = useState([])
+
+
+    const [getData,setGetData] = useState([])
 
 const getAll = () => {
-    api.get("/posts").then((e) => setGetData(e.data)).catch(() => console.log("error"))
+    api.get("/posts").then((e) => {
+        const dat = e.data.filter((a:{_id:string}) => a._id !== data?._id);
+setGetData(dat)
+    }).catch(() => console.log("error"))
     console.log(getData)
 }
 
@@ -38,6 +52,7 @@ useEffect(() => {
         getAll()
     
 },[])
+
 
     useEffect(() => {
         const Mydata = data.loves.find((e:any) => e.id === localStorage.getItem("userId"));
@@ -61,6 +76,8 @@ useEffect(() => {
         
     },[])
 
+
+    
     const DeleteComment = async (id:string , idComment:string | number) => {
         api.put(`/posts/deleteComment/${id}` , {commentId:idComment} , {headers:{"x-auth-header":localStorage.getItem("token")}}).then(() => {
             toast.success("Comment Deleted Successfully")
@@ -68,9 +85,27 @@ useEffect(() => {
             console.log("error => " , e)
             toast.error("Error Deleting Comment")
         }
-        )
-        routes.refresh()
-    }
+    )
+    routes.refresh()
+}
+
+const [arabic,setArabic] =useState("")
+// useEffect(() => {
+//     if (arabic){
+//         document.body.dir = "rtl"
+//     }else {
+//         document.body.dir = "ltr"
+//     }
+// },[arabic])
+
+    useEffect(() => {
+        console.log(data?.language)
+    },[arabic])
+
+    const [to,setTo]:any = useState("")
+    useEffect(() => {
+      setTo(localStorage.getItem("token"))
+    },[])        
 
   return (
     <>
@@ -78,7 +113,7 @@ useEffect(() => {
      <div className="parent w-full flex justify-center max-md:px-5 " style={{scrollBehavior:"smooth"}}>
 <div className="container  w-[48rem] py-10">
     <div className="header my-4 mb-10">
-        <h1 className='font-bold text-6xl max-md:text-2xl'>{data.PostName}</h1>
+        <h1 className={`font-bold text-6xl max-md:text-5xl ${arabic ? geistMono.className : ""} `} dir={arabic ? "rtl" : "ltr"}>{arabic && data?.language ? data?.languageData?.title : data?.PostName}</h1>
         {/* <p className='text-3xl font-medium text-[#595959] mt-1'>test test test af is my test</p> */}
        <div className="flex-row my-7 flex gap-2">
          <div className="account flex gap-2 items-center">
@@ -100,9 +135,14 @@ useEffect(() => {
                     <span>{data.comments.length}</span>
                 </div>
             </div>
-             <div className="share cursor-pointer">
+           <div className="flex gap-3">
+              <div className="translate cursor-pointer">
+<TranslateButton id={data?._id} arabic={arabic} setArabic={setArabic} />
+            </div>
+              <div className="share cursor-pointer">
 <ShareButton />
             </div>
+           </div>
           </div>
     </div>
     <div className="image flex justify-center">
@@ -113,7 +153,7 @@ useEffect(() => {
     </div>
     <div className="text py-10">
         
-        <Editor_read readOnly={true} data={data.content} />
+       {arabic ?  <Editor_read2 language={true} data_arabic={data?.languageData?.body} readOnly={true}  /> :  <Editor_read language={false}  readOnly={true} data={data.content} />}
     </div>
     <div className="tags">
          <div className="tags my-6 flex gap-2 max-md:grid max-md:grid-cols-3 max-md:w-fit">
@@ -202,12 +242,14 @@ useEffect(() => {
         </div>
     ))}
     </div>
-</div>
 
-<div className="other">
+    <div className="other">
     <h1 className='text-3xl font-semibold my-5 max-md:mb-10'>Recommend Posts</h1>
      <div className="posts grid-cols-2 max-md:grid-cols-1 gap-10 grid">
           {getData.slice(0,4).map((e:post) => (
+            <Link href={"/"+e._id} onClick={() => {
+                            api.put("/posts/updateViews",{view:e.view+1 , id:e._id} , {headers:{"x-auth-header":to}}).then((e) => console.log("success")).catch((err) => console.log("ee",err))
+            }}>
              <div  className="post rounded-md">
              <Image src={e.Banner} width={500} height={200} alt='' className="image object-cover mb-3 w-full h-[200px] bg-red-500" />
              <span className='font-medium text-[13px] text-[#595959] '>{e.Date.toString().slice(0,10)}</span>
@@ -219,12 +261,14 @@ useEffect(() => {
                     </div>
                     <div className="views flex gap-2 text-[15px] items-center">
                         <Heart  size={16} />
-                        <span>0</span>
+                        <span>{e?.loves.length}</span>
                     </div>
                 </div>
            </div>
+            </Link>
           ))}
           </div>
+</div>
 </div>
   </div>
   </div>
